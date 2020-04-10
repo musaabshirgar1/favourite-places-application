@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#007232C1"
+    android:padding="20dp"
+    tools:context=".LoginFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <EditText
+        android:id="@+id/nameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="41dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/custom_registration_edittext"
+        android:drawableStart="@drawable/custom_enter_name_edit_text"
+        android:drawableLeft="@drawable/custom_enter_name_edit_text"
+        android:ems="10"
+        android:hint="Enter your Full Name..."
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/emailRegistrationEditText"
+        android:layout_width="match_parent"
+        android:layout_height="41dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/custom_registration_edittext"
+        android:drawableStart="@drawable/custom_email_edit_text"
+        android:drawableLeft="@drawable/custom_email_edit_text"
+        android:ems="10"
+        android:hint="Enter your Email Address..."
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/nameEditText"
+        app:layout_constraintTop_toBottomOf="@+id/nameEditText" />
+
+    <EditText
+        android:id="@+id/passwordRegistrationEditText"
+        android:layout_width="match_parent"
+        android:layout_height="41dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/custom_registration_edittext"
+        android:drawableLeft="@drawable/custom_password_edit_text"
+        android:ems="10"
+        android:hint="Enter your Password..."
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/emailRegistrationEditText"
+        app:layout_constraintTop_toBottomOf="@+id/emailRegistrationEditText" />
+
+    <EditText
+        android:id="@+id/confirmPasswordRegistrationEditText"
+        android:layout_width="match_parent"
+        android:layout_height="41dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/custom_registration_edittext"
+        android:drawableStart="@drawable/custom_password_edit_text"
+        android:drawableLeft="@drawable/custom_password_edit_text"
+        android:ems="10"
+        android:hint="Enter your Password Again..."
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/passwordRegistrationEditText"
+        app:layout_constraintTop_toBottomOf="@+id/passwordRegistrationEditText" />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="116dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/custom_button"
+        android:text="Register"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/confirmPasswordRegistrationEditText"
+        app:layout_constraintTop_toBottomOf="@+id/confirmPasswordRegistrationEditText" />
+</androidx.constraintlayout.widget.ConstraintLayout>

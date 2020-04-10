@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "647578111562",
+    "firebase_url": "https://favourite-places-20829.firebaseio.com",
+    "project_id": "favourite-places-20829",
+    "storage_bucket": "favourite-places-20829.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:647578111562:android:47807496feb4f3e63660b3",
+        "android_client_info": {
+          "package_name": "com.example.favouriteplacesapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "647578111562-cmthos19bpetvjaa68e6ejplstdjq8td.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgC8lWhr-wMhZrnjb2BKOfvTYEd4jAYrY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "647578111562-cmthos19bpetvjaa68e6ejplstdjq8td.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
