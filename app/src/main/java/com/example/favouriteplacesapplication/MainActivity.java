@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity{
 
     TextView typeTextView;
     boolean newUserOrNot = false;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +56,5 @@ public class MainActivity extends AppCompatActivity{
                 }
             }
         });
-
-
     }
-
 }
