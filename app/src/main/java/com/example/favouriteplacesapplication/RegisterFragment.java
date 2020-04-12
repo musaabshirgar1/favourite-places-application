@@ -91,6 +91,7 @@ public class RegisterFragment extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+                        getActivity().finish();
                         Log.i("Info", "User Added");
                         Intent intent = new Intent(getContext(),FavouritePlaces.class);
                         startActivity(intent);

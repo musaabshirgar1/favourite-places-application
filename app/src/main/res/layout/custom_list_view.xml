@@ -13,20 +13,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:cardCornerRadius="20dp"
+        app:cardCornerRadius="14dp"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/custom_cardview"
-            android:padding="8dp">
+            android:padding="5dp">
 
             <TextView
                 android:id="@+id/nameOfFavPlaceTextView"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:fontFamily="@font/leaguegothic_regular"
                 android:gravity="start"
                 android:text="Name:"
@@ -34,7 +34,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.13"
+                app:layout_constraintHorizontal_bias="0.062"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,19 +46,19 @@
                 android:gravity="start"
                 android:text="Date:"
                 android:textColor="#040404"
-                android:textSize="18sp"
+                android:textSize="17sp"
                 app:layout_constraintStart_toStartOf="@+id/nameOfFavPlaceTextView"
                 app:layout_constraintTop_toBottomOf="@+id/nameOfFavPlaceTextView" />
 
             <TextView
                 android:id="@+id/addressOfFavPlaceTextView"
-                android:layout_width="200dp"
+                android:layout_width="240dp"
                 android:layout_height="30sp"
                 android:fontFamily="@font/leaguegothic_regular"
                 android:gravity="start"
                 android:text="Address:"
                 android:textColor="#040404"
-                android:textSize="12sp"
+                android:textSize="13sp"
                 app:layout_constraintStart_toStartOf="@+id/dateVisitedTextView"
                 app:layout_constraintTop_toBottomOf="@+id/dateVisitedTextView" />
 
