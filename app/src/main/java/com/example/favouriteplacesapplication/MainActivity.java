@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity{
 
         typeTextView = findViewById(R.id.typeTextView);
 
-
         getSupportFragmentManager().
                 beginTransaction()
                 .add(R.id.fragment_container, new LoginFragment())
