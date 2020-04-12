@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,11 +27,12 @@ public class LoginFragment extends Fragment {
 
     EditText emailLoginEditText;
     EditText passwordLoginEditText;
+    TextView forgotPasswordTextView;
     Button loginButton;
     String emailLogin;
     String passwordLogin;
 
-    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
 
     public LoginFragment() {
@@ -44,6 +46,7 @@ public class LoginFragment extends Fragment {
 
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -52,6 +55,17 @@ public class LoginFragment extends Fragment {
         emailLoginEditText = view.findViewById(R.id.emailLoginEditText);
         passwordLoginEditText = view.findViewById(R.id.passwordLoginEditText);
         loginButton = view.findViewById(R.id.loginButton);
+        forgotPasswordTextView = view.findViewById(R.id.forgotPasswordTextView);
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+
+        forgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ForgotPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +90,7 @@ public class LoginFragment extends Fragment {
                         Toast.makeText(getContext(), "Welcome To Favourite Places", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getContext(), FavouritePlaces.class);
                         startActivity(intent);
+                        getActivity().finish();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

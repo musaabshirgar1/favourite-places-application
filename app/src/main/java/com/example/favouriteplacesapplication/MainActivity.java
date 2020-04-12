@@ -1,7 +1,9 @@
 package com.example.favouriteplacesapplication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,20 +12,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity{
 
     TextView typeTextView;
     boolean newUserOrNot = false;
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);//will hide the title
-        getSupportActionBar().hide(); //hide the title bar
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
-        //FirebaseApp.initializeApp(this);
+
         typeTextView = findViewById(R.id.typeTextView);
 
 

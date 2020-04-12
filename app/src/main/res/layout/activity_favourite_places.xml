@@ -12,8 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -48,12 +49,13 @@
             android:background="@drawable/custom_button"
             android:onClick="goToMap"
             android:text="Go To Map"
-            android:textSize="20sp"/>
+            android:fontFamily="@font/leaguegothic_regular"
+            android:textSize="30sp"/>
 
         <ImageButton
             android:id="@+id/addFavouritePlace"
             android:layout_width="50dp"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             android:background="@drawable/custom_button"
             android:onClick="takePhoto"
             android:layout_weight="0.5"

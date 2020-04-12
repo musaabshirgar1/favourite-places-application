@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#007232C1"
-    android:padding="20dp"
+    android:padding="10dp"
     tools:context=".LoginFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -15,13 +15,14 @@
         android:id="@+id/emailLoginEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:background="@drawable/rounded_edittext"
         android:drawableStart="@drawable/custom_email_edit_text"
         android:drawableLeft="@drawable/custom_email_edit_text"
         android:ems="10"
+        android:fontFamily="@font/leaguegothic_regular"
         android:hint="Enter Email Address.."
         android:inputType="textEmailAddress"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,21 +37,39 @@
         android:drawableStart="@drawable/custom_password_edit_text"
         android:drawableLeft="@drawable/custom_password_edit_text"
         android:ems="10"
+        android:fontFamily="@font/leaguegothic_regular"
         android:hint="Enter Password.."
         android:inputType="textPassword"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/emailLoginEditText"
         app:layout_constraintTop_toBottomOf="@+id/emailLoginEditText" />
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="97dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:layout_marginLeft="84dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/custom_button"
+        android:fontFamily="@font/leaguegothic_regular"
         android:text="Login"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="30sp"
         app:layout_constraintStart_toStartOf="@+id/passwordLoginEditText"
         app:layout_constraintTop_toBottomOf="@+id/passwordLoginEditText" />
+
+    <TextView
+        android:id="@+id/forgotPasswordTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/leaguegothic_regular"
+        android:text="Forgot Password?"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.197"
+        app:layout_constraintStart_toEndOf="@+id/loginButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>

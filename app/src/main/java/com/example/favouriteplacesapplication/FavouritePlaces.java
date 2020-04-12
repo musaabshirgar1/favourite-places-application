@@ -17,11 +17,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.webkit.MimeTypeMap;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -66,6 +70,8 @@ public class FavouritePlaces extends AppCompatActivity implements OpenDialogBox.
     StorageReference fileReference;
     StorageTask storageTask;
 
+    boolean doubleBackToExitPressedOnce = false;
+
     ProgressBar progressBar;
 
     List<String> nameOfFavPlaces;
@@ -84,8 +90,6 @@ public class FavouritePlaces extends AppCompatActivity implements OpenDialogBox.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);//will hide the title
-        getSupportActionBar().hide(); //hide the title bar
         setContentView(R.layout.activity_favourite_places);
 
         progressBar = findViewById(R.id.progressBar);
@@ -153,12 +157,33 @@ public class FavouritePlaces extends AppCompatActivity implements OpenDialogBox.
         });
 
     }
+
     public void takePhoto(View view){
         OpenDialogBox openDialogBox = new OpenDialogBox();
         openDialogBox.show(getSupportFragmentManager(), "Open Dialog Box");
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.logout:{
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void sendData(Uri uri, final String nameOfFavouritePlace, Date date, double lat, double lon) {
@@ -288,4 +313,19 @@ public class FavouritePlaces extends AppCompatActivity implements OpenDialogBox.
         startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+    }
 }
