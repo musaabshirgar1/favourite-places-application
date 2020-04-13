@@ -5,3 +5,5 @@ Along with that it uses firebase authentication for user login and signup option
 
 To use this application for testing purpose create your own firebase database project and add the required .json file inside the app folder.
 
+To view a video on the working of the application go to the click on the <a href="https://drive.google.com/file/d/1-lcCamQB8sDK9pV3sEFzUMLXOlqibRMV/view?usp=sharing">Link</a>
+
