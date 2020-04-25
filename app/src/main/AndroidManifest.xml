@@ -16,9 +16,9 @@
     <application
         android:name=".FirebaseApp"
         android:allowBackup="true"
-        android:icon="@drawable/rsz_1favplaceslogo"
+        android:icon="@drawable/logo1"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/rsz_1favplaceslogo"
+        android:roundIcon="@drawable/logo1"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ForgotPasswordActivity"></activity>
@@ -32,7 +32,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyA7dorZVsmYmuQFj8rR9Mrn2e1nerQ9FLE" />
 
         <activity
             android:name=".OpenMapActivity"

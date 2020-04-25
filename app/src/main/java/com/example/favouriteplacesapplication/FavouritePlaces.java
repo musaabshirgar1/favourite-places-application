@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -70,14 +71,13 @@ public class FavouritePlaces extends AppCompatActivity implements OpenDialogBox.
     StorageReference fileReference;
     StorageTask storageTask;
 
+
     boolean doubleBackToExitPressedOnce = false;
 
     ProgressBar progressBar;
+    ProgressDialog progressDialog;
 
-    List<String> nameOfFavPlaces;
-    List<String> dateVisitedOfFavPlaces;
-    List<String> imageUrlOfFavPlaces;
-    List<String> addressOfFavPlaces;
+    ArrayList<FavPlaces> favPlacesArrayList;
 
     String userId;
     long favPlaceCount;
@@ -87,12 +87,20 @@ public class FavouritePlaces extends AppCompatActivity implements OpenDialogBox.
     String nameOfPlace;
     Date currentDate;
     String imageUrl;
+
+    long numberOfFavPlaces;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite_places);
 
         progressBar = findViewById(R.id.progressBar);
+        progressDialog = new ProgressDialog(FavouritePlaces.this);
+        progressDialog.show();
+        progressDialog.setContentView(R.layout.progress_bar);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         assert firebaseUser != null;
         userId = firebaseUser.getUid();
@@ -102,23 +110,24 @@ public class FavouritePlaces extends AppCompatActivity implements OpenDialogBox.
 
         recyclerView = findViewById(R.id.recyclerView);
 
-        nameOfFavPlaces = new ArrayList<>();
-        addressOfFavPlaces = new ArrayList<>();
-        dateVisitedOfFavPlaces = new ArrayList<>();
-        imageUrlOfFavPlaces = new ArrayList<>();
+        favPlacesArrayList = new ArrayList<>();
 
         documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
                 if(e != null){
+                    progressDialog.dismiss();
                     Toast.makeText(FavouritePlaces.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 } else {
+                    favPlacesArrayList.clear();
                     if (documentSnapshot != null && documentSnapshot.exists()) {
                         try {
                             Map<String, Object> userFavPlacesMap = (Map<String, Object>) documentSnapshot.getData().get("userFavPlaces");
+                            Log.i("Info", userFavPlacesMap.toString());
                             for (Map.Entry<String, Object> entry : userFavPlacesMap.entrySet()) {
 
                                 Map<String, Object> favPlacesMap = (Map<String, Object>) entry.getValue();
+                                long id = (long) favPlacesMap.get("favPlaceId");
                                 String name = (String) favPlacesMap.get("nameOfFavPlace");
                                 Timestamp curdate = (Timestamp) favPlacesMap.get("currentDate");
                                 String date = curdate.toDate().toString();
@@ -131,13 +140,17 @@ public class FavouritePlaces extends AppCompatActivity implements OpenDialogBox.
 
                                 String address = addresses.get(0).getAddressLine(0);
 
-                                if (!nameOfFavPlaces.contains(name) && !dateVisitedOfFavPlaces.contains(date) && !imageUrlOfFavPlaces.contains(url) &&
-                                        !addressOfFavPlaces.contains(address)) {
-                                    nameOfFavPlaces.add(name);
-                                    dateVisitedOfFavPlaces.add(date);
-                                    imageUrlOfFavPlaces.add(url);
-                                    addressOfFavPlaces.add(address);
-                                }
+                                FavPlaces favPlaces = new FavPlaces();
+                                favPlaces.setFavPlaceId(id);
+                                favPlaces.setNameOfFavPlace(name);
+                                favPlaces.setDateVisitedOfFavPlace(date);
+                                favPlaces.setAddressOfFavPlace(address);
+                                favPlaces.setImageUrlOfFavPlace(url);
+                                favPlaces.setUserId(userId);
+
+                                favPlacesArrayList.add(favPlaces);
+
+                                Log.i("FavPlacesArrayList", favPlacesArrayList.toString() );
                             }
                         } catch (Exception e1) {
                             e1.printStackTrace();
@@ -146,13 +159,15 @@ public class FavouritePlaces extends AppCompatActivity implements OpenDialogBox.
                         Toast.makeText(FavouritePlaces.this, "You don't have any favourite places", Toast.LENGTH_SHORT).show();
                     }
                 }
-                MyAdapter myAdapter = new MyAdapter(nameOfFavPlaces, dateVisitedOfFavPlaces,imageUrlOfFavPlaces,addressOfFavPlaces,getApplicationContext());
+                progressDialog.dismiss();
+                MyAdapter myAdapter = new MyAdapter(favPlacesArrayList,FavouritePlaces.this);
                 recyclerView.setAdapter(myAdapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                recyclerView.setLayoutManager(new WrapContentLinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
                 DividerItemDecoration dividerItemDecoration =
                         new DividerItemDecoration(getApplicationContext(),
                                 DividerItemDecoration.VERTICAL);
                 recyclerView.addItemDecoration(dividerItemDecoration);
+
             }
         });
 
@@ -257,8 +272,8 @@ public class FavouritePlaces extends AppCompatActivity implements OpenDialogBox.
                 favPlaceCount = (long) documentSnapshot.get("favPlaceCount");
 
                 Map<String, Object> usersData = new HashMap<>();
-                Map<String, Object> favPlaceIds = new HashMap<>();
                 Map<String, Object> favPlaces = new HashMap<>();
+                Map<String, Object> favPlaceIds = new HashMap<>();
 
                 favPlaces.put("favPlaceId", favPlaceCount);
                 favPlaces.put("imageUrl", imageUrl);
@@ -267,7 +282,7 @@ public class FavouritePlaces extends AppCompatActivity implements OpenDialogBox.
                 favPlaces.put("favPlaceLat", favPlaceLat);
                 favPlaces.put("favPlaceLon", favPlaceLon);
 
-                favPlaceIds.put(String.valueOf(favPlaceCount), favPlaces);
+                favPlaceIds.put(nameOfPlace, favPlaces);
 
                 long m = favPlaceCount + 1;
 

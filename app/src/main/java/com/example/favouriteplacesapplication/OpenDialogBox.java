@@ -12,6 +12,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -72,6 +74,7 @@ public class OpenDialogBox extends AppCompatDialogFragment {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -158,15 +161,18 @@ public class OpenDialogBox extends AppCompatDialogFragment {
         return builder.create();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void requestLocationPermission() {
         ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()),locationPermission,LOCATION_REQUEST_CODE);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private boolean checkLocationPermission() {
         return ContextCompat.checkSelfPermission(Objects.requireNonNull(getActivity()), Manifest.permission.ACCESS_FINE_LOCATION)
                 == (PackageManager.PERMISSION_GRANTED);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private boolean checkCameraPermission() {
         return ContextCompat.checkSelfPermission(Objects.requireNonNull(getActivity()), Manifest.permission.CAMERA)
                 == (PackageManager.PERMISSION_GRANTED)
@@ -175,10 +181,12 @@ public class OpenDialogBox extends AppCompatDialogFragment {
                         == (PackageManager.PERMISSION_GRANTED);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void requestCameraPermission() {
         ActivityCompat.requestPermissions(Objects.requireNonNull(getActivity()), cameraPermission, CAMERA_REQUEST_CODE);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void pickCamera() {
         ContentValues values = new ContentValues();
         values.put(MediaStore.Images.Media.TITLE, "New Picture");
@@ -190,6 +198,7 @@ public class OpenDialogBox extends AppCompatDialogFragment {
         startActivityForResult(cameraIntent, IMAGE_PICK_CAMERA_CODE);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == CAMERA_REQUEST_CODE) {
